@@ -1,0 +1,9 @@
+*.class
+*.settings
+*.mymetadata
+*.project
+*target
+*.war
+*.metadata
+*.classpath
+*.svn
