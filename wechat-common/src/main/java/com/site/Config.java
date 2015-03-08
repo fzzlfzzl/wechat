@@ -6,9 +6,9 @@ public class Config {
 
 	public static String getHost() {
 		if (Util.isDevelopEnvironment()) {
-			return "http://127.0.0.1:8080/";
+			return "http://127.0.0.1:8080/wechat-message/";
 		} else {
-			return "http://jiuwubaodu.duapp.com/";
+			return "http://95wechat.duapp.com/";
 		}
 	}
 }
