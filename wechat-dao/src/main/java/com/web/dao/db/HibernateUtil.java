@@ -50,7 +50,7 @@ public class HibernateUtil {
 		String user = "root";
 		String pwd = "root";
 		InputStream is = trim(defaultPath);
-		XmlObject obj = XmlObject.toXmlObject(is);
+		XmlObject obj = XmlObject.readFromStream(is);
 		XmlObject sessionFactory = obj.get("session-factory");
 		int length = sessionFactory.getLength("property");
 		for (int i = 0; i < length; i++) {

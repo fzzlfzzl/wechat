@@ -2,6 +2,7 @@ package com.site.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.StringReader;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -78,7 +79,16 @@ public class XmlObject {
 		return element.getText();
 	}
 
-	public static XmlObject toXmlObject(InputStream is) {
+	public void writeToStream(OutputStream os) {
+		XMLOutputter out = new XMLOutputter();
+		try {
+			out.output(doc, os);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static XmlObject readFromStream(InputStream is) {
 		@SuppressWarnings("deprecation")
 		SAXBuilder builder = new SAXBuilder(false);
 		Document document;
@@ -92,7 +102,7 @@ public class XmlObject {
 
 	public static XmlObject toXmlObject(String xml) {
 		try {
-			return toXmlObject(new ByteArrayInputStream(xml.getBytes()));
+			return readFromStream(new ByteArrayInputStream(xml.getBytes()));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

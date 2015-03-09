@@ -33,15 +33,33 @@ public class HttpClient {
 		}
 	}
 
+	public XmlObject post(XmlObject req) {
+		try {
+			URL postUrl = new URL(url);
+			HttpURLConnection connection = (HttpURLConnection) postUrl.openConnection();
+			connection.setDoOutput(true);
+			connection.setDoInput(true);
+			connection.setRequestMethod("POST");
+			connection.setUseCaches(false);
+			connection.setInstanceFollowRedirects(true);
+			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+			req.writeToStream(connection.getOutputStream());
+			XmlObject res = XmlObject.readFromStream(connection.getInputStream());
+			connection.disconnect();
+			return res;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	public String post(String req) {
 		try {
 			URL postUrl = new URL(url);
 			HttpURLConnection connection = (HttpURLConnection) postUrl.openConnection();
 			connection.setDoOutput(true);
 			connection.setDoInput(true);
-
 			connection.setRequestMethod("POST");
-
 			connection.setUseCaches(false);
 			connection.setInstanceFollowRedirects(true);
 			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");

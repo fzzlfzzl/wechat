@@ -11,8 +11,7 @@ public class EncodingInterceptor extends HandlerInterceptorAdapter {
 	// Logger.getLogger(UserContextInterceptor.class);
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-			Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		return true;

@@ -19,7 +19,7 @@ public class OrderMessageTest {
 		try {
 			HttpClient client = new HttpClient("http://127.0.0.1:8080/wechat-message/message");
 			String picUrl = appPath + "img/banner.jpg";
-			String url = appPath + "order/index?openid=" + Common.USER_NAME;
+			String url = appPath + "order/" + Common.USER_NAME;
 			XmlObject req = Common.createClickEventMessage("ORDER");
 			String resStr = client.post(req.toXmlString());
 			System.out.println(resStr);

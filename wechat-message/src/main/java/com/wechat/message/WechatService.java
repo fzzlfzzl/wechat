@@ -1,6 +1,5 @@
 package com.wechat.message;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,12 +10,10 @@ import org.apache.log4j.Logger;
 import com.site.util.ExceptionLogger;
 import com.site.util.Util;
 import com.site.util.XmlObject;
-import com.web.dao.db.HibernateUtil;
 import com.web.dao.entity.Message;
 import com.web.dao.entity.User;
 import com.web.dao.impl.UserDao;
 import com.web.interceptor.context.UserContext;
-import com.web.interceptor.context.UserContextPool;
 import com.wechat.message.factory.MessageFactory;
 import com.wechat.message.handler.StateHandler;
 import com.wechat.message.reply.IMessageReply;
@@ -57,9 +54,8 @@ public class WechatService {
 
 	public static void doPost(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			prehandle(request, response);
 
-			XmlObject reqObject = XmlObject.toXmlObject(request.getInputStream());
+			XmlObject reqObject = XmlObject.readFromStream(request.getInputStream());
 			String req = reqObject.toXmlString();
 			logger.info("Request:" + req);
 
@@ -72,15 +68,6 @@ public class WechatService {
 			logger.error(new ExceptionLogger(e));
 			throw new RuntimeException(e);
 		}
-	}
-
-	private static void prehandle(HttpServletRequest request, HttpServletResponse response)
-			throws UnsupportedEncodingException {
-		response.setContentType("text/html");
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		UserContext context = new UserContext(request, response, HibernateUtil.openSession());
-		UserContextPool.put(context);
 	}
 
 	public static XmlObject service(XmlObject reqObject) {
