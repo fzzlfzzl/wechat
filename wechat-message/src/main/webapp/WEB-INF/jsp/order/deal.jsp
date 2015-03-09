@@ -4,6 +4,6 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<div>${orderList}</div>
+	<h2>订餐成功</h2>
 </body>
 </html>

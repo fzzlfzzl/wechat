@@ -1,3 +1,7 @@
+#sync conf
+cp ./wechat-dao/src/test/resources/* ./wechat-message/src/main/resources/
+cp ./wechat-dao/src/test/resources/* ./wechat-manage/src/main/resources/
+
 #install
 cd wechat-common
 mvn clean install

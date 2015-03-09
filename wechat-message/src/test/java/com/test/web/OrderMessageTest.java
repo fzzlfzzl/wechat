@@ -3,12 +3,37 @@ package com.test.web;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.List;
+
+import org.hibernate.Session;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.site.util.HttpClient;
+import com.site.util.Util;
 import com.site.util.XmlObject;
+import com.test.service.Common;
+import com.web.dao.db.HibernateUtil;
+import com.web.dao.entity.User;
+import com.web.dao.impl.UserDao;
 
 public class OrderMessageTest {
+
+	private User user = null;
+
+	@Before
+	public void setup() {
+		Session session = HibernateUtil.openSession();
+		UserDao dao = new UserDao(session);
+		List<User> list = dao.list();
+		if (list.size() == 0) {
+			user = new User();
+			user.setOpenId(Util.uuid());
+			dao.save(user);
+		} else {
+			user = list.get(0);
+		}
+	}
 
 	@Test
 	public void test() {
@@ -16,11 +41,12 @@ public class OrderMessageTest {
 			return;
 		}
 		String appPath = "http://127.0.0.1:8080/wechat-message/";
+
 		try {
 			HttpClient client = new HttpClient("http://127.0.0.1:8080/wechat-message/message");
 			String picUrl = appPath + "img/banner.jpg";
-			String url = appPath + "order/" + Common.USER_NAME;
-			XmlObject req = Common.createClickEventMessage("ORDER");
+			String url = appPath + "order/" + user.getOpenId();
+			XmlObject req = Common.createClickEventMessage(user.getOpenId(), "ORDER");
 			String resStr = client.post(req.toXmlString());
 			System.out.println(resStr);
 			XmlObject res = XmlObject.toXmlObject(resStr);

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.site.util.HttpClient;
 import com.site.util.XmlObject;
+import com.test.service.Common;
 
 public class NormalMessageTest {
 

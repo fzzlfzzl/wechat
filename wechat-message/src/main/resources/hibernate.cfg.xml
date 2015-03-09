@@ -22,6 +22,8 @@
 		<property name="connection.username">Scu0HwGwVF0ov4ES7SGuH6Cj</property>
 		<property name="connection.password">6OqgyPLkVIXrdmh8Rl8MpZ3YFKAfZ33U</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.useUnicode">true</property>
+		<property name="connection.characterEncoding">UTF-8</property>
 		<property name="show_sql">true</property>
 		<property name="hbm2ddl.auto">update</property>
 
@@ -29,5 +31,6 @@
 		<mapping class="com.web.dao.entity.Message" />
 		<mapping class="com.web.dao.entity.Admin" />
 		<mapping class="com.web.dao.entity.AccessToken" />
+		<mapping class="com.web.dao.entity.Orders" />
 	</session-factory>
 </hibernate-configuration>

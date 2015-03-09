@@ -2,7 +2,6 @@ package com.test.service;
 
 import java.net.Socket;
 
-import com.site.util.Util;
 import com.site.util.XmlObject;
 
 public class Common {
@@ -16,7 +15,7 @@ public class Common {
 		req.get("CreateTime").setText(System.currentTimeMillis() / 1000);
 		req.get("MsgType").setCDATA("event");
 		req.get("Event").setCDATA("CLICK");
-		req.get("MsgId").setText(Util.random());
+		req.get("MsgId").setText("" + System.currentTimeMillis());
 		req.get("EventKey").setCDATA(key);
 		return req;
 	}
@@ -27,7 +26,7 @@ public class Common {
 		req.get("FromUserName").setCDATA(openid);
 		req.get("CreateTime").setText(System.currentTimeMillis() / 1000);
 		req.get("MsgType").setCDATA("text");
-		req.get("MsgId").setText(Util.random());
+		req.get("MsgId").setText("" + System.currentTimeMillis());
 		req.get("Content").setCDATA(content);
 		return req;
 	}
