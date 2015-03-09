@@ -1,5 +1,7 @@
 package com.test.service;
 
+import java.net.Socket;
+
 import com.site.util.Util;
 import com.site.util.XmlObject;
 
@@ -28,5 +30,15 @@ public class Common {
 		req.get("MsgId").setText(Util.random());
 		req.get("Content").setCDATA(content);
 		return req;
+	}
+
+	public static boolean testConnect(String ip, int port) {
+		try {
+			Socket socket = new Socket(ip, port);
+			socket.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

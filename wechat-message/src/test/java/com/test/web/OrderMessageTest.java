@@ -5,7 +5,6 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.site.Config;
 import com.site.util.HttpClient;
 import com.site.util.XmlObject;
 
@@ -16,10 +15,11 @@ public class OrderMessageTest {
 		if (!Common.testConnect("127.0.0.1", 8080)) {
 			return;
 		}
+		String appPath = "http://127.0.0.1:8080/wechat-message/";
 		try {
 			HttpClient client = new HttpClient("http://127.0.0.1:8080/wechat-message/message");
-			String picUrl = Config.getHost() + "img/banner.jpg";
-			String url = Config.getHost() + "order/index?openid=" + Common.USER_NAME;
+			String picUrl = appPath + "img/banner.jpg";
+			String url = appPath + "order/index?openid=" + Common.USER_NAME;
 			XmlObject req = Common.createClickEventMessage("ORDER");
 			String resStr = client.post(req.toXmlString());
 			System.out.println(resStr);

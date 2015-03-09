@@ -4,6 +4,7 @@ import com.service.wechat.Const.EventKey;
 import com.service.wechat.Const.MenuName;
 import com.site.Config;
 import com.web.dao.entity.Message;
+import com.web.interceptor.context.UserContext;
 import com.wechat.message.handler.IClickEventMessageHandler;
 import com.wechat.message.handler.IMenuMessageHandler;
 import com.wechat.message.handler.StateHandler;
@@ -17,11 +18,12 @@ public class OrderMessageHandler implements IClickEventMessageHandler, IMenuMess
 
 	@Override
 	public IMessageReply handleMessage(Message message, StateHandler state) {
+		String appPath = Config.getHost(UserContext.current().getRequest());
 		UserRedirectMessageReply reply = new UserRedirectMessageReply(message);
 		reply.setDescription("description");
 		reply.setTitle("title");
-		reply.setPicUrl(Config.getHost() + "img/banner.jpg");
-		reply.setUrl(Config.getHost() + "order/" + message.getOpenId());
+		reply.setPicUrl(appPath + "img/banner.jpg");
+		reply.setUrl(appPath + "order/" + message.getOpenId());
 		return reply;
 	}
 

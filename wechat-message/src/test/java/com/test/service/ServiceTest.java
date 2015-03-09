@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.service.wechat.Const;
 import com.service.wechat.Const.MsgReply;
 import com.site.util.Util;
 import com.site.util.XmlObject;
@@ -149,11 +148,4 @@ public class ServiceTest {
 		}
 	}
 
-	@Test
-	public void orderTest() {
-		String openid = Util.uuid();
-		XmlObject req = Common.createClickEventMessage(openid, Const.EventKey.ORDER);
-		XmlObject res = WechatService.service(req);
-		System.out.println(res);
-	}
 }

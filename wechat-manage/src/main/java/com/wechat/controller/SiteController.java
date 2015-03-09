@@ -13,8 +13,6 @@ import com.site.util.ExceptionLogger;
 import com.web.controller.base.WebController;
 import com.web.dao.db.HibernateUtil;
 import com.web.dao.entity.Message;
-import com.web.view.View;
-import com.web.view.site.admin.MessageListView;
 
 @Controller
 @RequestMapping("/site")
