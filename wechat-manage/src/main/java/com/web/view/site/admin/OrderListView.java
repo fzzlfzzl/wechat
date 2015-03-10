@@ -16,7 +16,7 @@ public class OrderListView extends View {
 
 	@Override
 	public void render(StringBuffer sb) {
-		sb.append("<table>");
+		sb.append("<table class='table'>");
 		for (Orders order : list) {
 			HtmlTag tr = HtmlTag.tr();
 			// openid name telephone address dishes

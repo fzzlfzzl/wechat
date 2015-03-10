@@ -9,7 +9,7 @@ import com.web.view.impl.template.TemplateViewExpression;
 public class UserListView extends View {
 
 	private List<User> list = null;
-	private String tpl = "<li><a href='user/$openid'>$openid</a></li>";
+	private String tpl = "<li class='list-group-item'><a href='user/$openid'>$openid</a></li>";
 	private TemplateViewExpression exp = TemplateViewExpression.compile(tpl);
 
 	public UserListView(List<User> list) {
@@ -18,7 +18,7 @@ public class UserListView extends View {
 
 	@Override
 	public void render(StringBuffer sb) {
-		sb.append("<ul>");
+		sb.append("<ul class='list-group'>");
 		for (User user : list) {
 			View view = exp.createBuilder().setParam("openid", user.getOpenId()).build();
 			view.render(sb);

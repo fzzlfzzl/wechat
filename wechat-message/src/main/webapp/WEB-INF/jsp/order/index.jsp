@@ -1,21 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <form action="<%=request.getContextPath()%>/order/deal" method="post">
-	<input type="hidden" name="openid" value="${openid}" />
-	选择:
-	<input type="radio" name="dishes" value="麻辣" />
-	麻辣
-	<input type="radio" name="dishes" value="微辣" />
-	微辣
-	<br />
-	姓名:
-	<input type="text" name="name" />
-	<br />
-	电话:
-	<input type="text" name="telephone" />
-	<br />
-	地址:
-	<input type="text" name="address" />
-	<br />
-	<input type="submit" value="OK" />
+	<div class="form-group">
+		<button class="btn btn-default" type="button">麻辣</button>
+		<button class="btn btn-default" type="button">微辣</button>
+	</div>
+	<div class="form-group">
+		<input type="text" class="form-control" id="telephone" name="telephone" placeholder="电话">
+	</div>
+	<div class="form-group">
+		<input type="text" class="form-control" id="address" name="address" placeholder="送餐地址">
+	</div>
+	<button type="submit" class="btn btn-default">确定</button>
 </form>
-

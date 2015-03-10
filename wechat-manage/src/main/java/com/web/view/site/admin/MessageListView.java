@@ -17,7 +17,7 @@ public class MessageListView extends View {
 	private View th() {
 		HtmlTag tr = HtmlTag.tr();
 		HtmlTag th = null;
-		String[] content = { "time", "msgtype", "content", "eventkey", "key" };
+		String[] content = { "时间", "类型", "内容", "事件", "关键字" };
 		for (String s : content) {
 			th = HtmlTag.th();
 			th.setContent(s);
@@ -29,8 +29,7 @@ public class MessageListView extends View {
 	private View tr(Message m) {
 		HtmlTag tr = HtmlTag.tr();
 		HtmlTag td = null;
-		String[] content = { m.getCreateTimeString(), m.getMsgType(), m.getContent(), m.getEvent(),
-				m.getEventKey() };
+		String[] content = { m.getCreateTimeString(), m.getMsgType(), m.getContent(), m.getEvent(), m.getEventKey() };
 		for (String s : content) {
 			td = HtmlTag.td();
 			td.setContent(s);
@@ -42,6 +41,7 @@ public class MessageListView extends View {
 	@Override
 	public void render(StringBuffer sb) {
 		HtmlTag table = HtmlTag.table();
+		table.addClass("table");
 		table.addChild(th());
 		for (Message m : list) {
 			table.addChild(tr(m));
