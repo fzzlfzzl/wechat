@@ -15,7 +15,7 @@ public class OrderDaoTest {
 		session.beginTransaction();
 		Orders order = new Orders();
 		order.setAddress("地址1");
-		order.setUserName("名字1");
+		order.setName("名字1");
 		order.setDishes("麻辣1");
 		order.setTelephone("1234");
 		order.setOpenid(Util.uuid());

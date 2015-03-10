@@ -13,7 +13,7 @@ public class Orders {
 	private long id;
 
 	private String openid;
-	private String userName;
+	private String name;
 	private String telephone;
 	private String address;
 	private String dishes;
@@ -51,11 +51,11 @@ public class Orders {
 	}
 
 	public String getUserName() {
-		return userName;
+		return name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

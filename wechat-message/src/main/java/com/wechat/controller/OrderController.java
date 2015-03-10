@@ -32,6 +32,7 @@ public class OrderController extends WebController {
 		session.beginTransaction();
 		Orders order = new Orders();
 		order.setOpenid(openid);
+		order.setName(name);
 		order.setDishes(dishes);
 		order.setTelephone(telephone);
 		order.setAddress(address);
