@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.web.interceptor.context.UserContext;
+import com.web.view.MasterModelAndView;
 
 public class WebController {
 
@@ -30,9 +31,9 @@ public class WebController {
 
 	protected ModelAndView createNormalModelAndView(String view) {
 		if (isSelfView(view)) {
-			return new ModelAndView(thisView(view));
+			return new MasterModelAndView(thisView(view));
 		} else {
-			return new ModelAndView(view);
+			return new MasterModelAndView(view);
 		}
 	}
 

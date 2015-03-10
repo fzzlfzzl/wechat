@@ -23,7 +23,7 @@ public class OrderMessageHandler implements IClickEventMessageHandler, IMenuMess
 		reply.setDescription("description");
 		reply.setTitle("title");
 		reply.setPicUrl(appPath + "img/banner.jpg");
-		reply.setUrl(appPath + "order/" + message.getOpenId());
+		reply.setUrl(appPath + "order/index/" + message.getOpenId());
 		return reply;
 	}
 

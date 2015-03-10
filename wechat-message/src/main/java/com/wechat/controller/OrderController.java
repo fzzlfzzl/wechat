@@ -17,7 +17,7 @@ public class OrderController extends WebController {
 
 	// private static Logger logger = Logger.getLogger(AccountController.class);
 
-	@RequestMapping(value = "/{openid}", method = RequestMethod.GET)
+	@RequestMapping(value = "/index/{openid}", method = RequestMethod.GET)
 	public ModelAndView index(@PathVariable String openid) throws Exception {
 		ModelAndView ret = createNormalModelAndView("index");
 		ret.addObject("openid", openid);
