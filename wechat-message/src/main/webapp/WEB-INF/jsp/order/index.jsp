@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<form action="deal" method="post">
+<form action="<%=request.getContextPath()%>/order/deal" method="post">
 	<input type="hidden" name="openid" value="${openid}" />
 	选择:
 	<input type="radio" name="dishes" value="麻辣" />

@@ -48,8 +48,8 @@ public class OrderMessageTest {
 			String url = appPath + "order/" + user.getOpenId();
 			XmlObject req = Common.createClickEventMessage(user.getOpenId(), "ORDER");
 			String resStr = client.post(req.toXmlString());
-			System.out.println(resStr);
 			XmlObject res = XmlObject.toXmlObject(resStr);
+			System.out.println(res.toXmlString());
 			assertEquals(res.get("MsgType").getText(), "news");
 			assertEquals(res.get("ArticleCount").getText(), "1");
 			res = res.get("Articles").get("item");
