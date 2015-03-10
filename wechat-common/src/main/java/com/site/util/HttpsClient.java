@@ -63,34 +63,38 @@ public class HttpsClient {
 		}
 	}
 
-	public String post(String reqString) throws Exception {
-		String bufferString = null;
-		StringBuffer buffer = new StringBuffer();
-		// setJKS();
-		URL url = new URL(this.url);
-		HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-		setSSLSocketFactory(conn);
-		// conn.setSSLSocketFactory(factory);
-		conn.setRequestMethod("POST");
-		conn.setDoOutput(true);
-		conn.setDoInput(true);
-		conn.setHostnameVerifier(new HostnameDoNothingVerifier());
-		conn.setUseCaches(false); // 不允许使用缓存
-		conn.setRequestProperty("connection", "keep-alive");
-		System.setProperty("http.keepAlive", "false");
-		conn.setRequestProperty("content-type", "text/xml");
-		conn.setRequestProperty("Charset", "UTF-8");
-		OutputStream os = conn.getOutputStream();
-		os.write(reqString.getBytes("UTF-8"));
-		os.close();
-		InputStream is = conn.getInputStream();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		while ((bufferString = br.readLine()) != null) {
-			buffer.append(bufferString);
+	public String post(String reqString) {
+		try {
+			String bufferString = null;
+			StringBuffer buffer = new StringBuffer();
+			// setJKS();
+			URL url = new URL(this.url);
+			HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+			setSSLSocketFactory(conn);
+			// conn.setSSLSocketFactory(factory);
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			conn.setHostnameVerifier(new HostnameDoNothingVerifier());
+			conn.setUseCaches(false); // 不允许使用缓存
+			conn.setRequestProperty("connection", "keep-alive");
+			System.setProperty("http.keepAlive", "false");
+			conn.setRequestProperty("content-type", "text/xml");
+			conn.setRequestProperty("Charset", "UTF-8");
+			OutputStream os = conn.getOutputStream();
+			os.write(reqString.getBytes("UTF-8"));
+			os.close();
+			InputStream is = conn.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			while ((bufferString = br.readLine()) != null) {
+				buffer.append(bufferString);
+			}
+			is.close();
+			String resString = buffer.toString();
+			return resString;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
-		is.close();
-		String resString = buffer.toString();
-		return resString;
 	}
 
 	private void setSSLSocketFactory(HttpsURLConnection conn) throws Exception {

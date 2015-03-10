@@ -20,15 +20,27 @@ public class AccessTokenDao extends Dao {
 		return (AccessToken) list.get(0);
 	}
 
-	public void saveOrUpdate(AccessToken token) {
+	public void delete() {
+		beginTransaction();
+		try {
+			session.createQuery("delete AccessToken").executeUpdate();
+			commit();
+		} catch (RuntimeException e) {
+			rollback();
+			throw e;
+		}
+	}
+
+	public void save(AccessToken token) {
 		try {
 			beginTransaction();
+			delete();
 			token.setUpdatetime(System.currentTimeMillis());
-			session.saveOrUpdate(token);
+			session.save(token);
 			commit();
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			rollback();
-			throw new RuntimeException(e);
+			throw e;
 		}
 	}
 }
