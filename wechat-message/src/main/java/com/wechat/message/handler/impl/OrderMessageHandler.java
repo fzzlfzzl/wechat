@@ -2,7 +2,6 @@ package com.wechat.message.handler.impl;
 
 import com.service.wechat.Const.EventKey;
 import com.service.wechat.Const.MenuName;
-import com.site.Config;
 import com.web.dao.entity.Message;
 import com.web.interceptor.context.UserContext;
 import com.wechat.message.handler.IClickEventMessageHandler;
@@ -10,6 +9,7 @@ import com.wechat.message.handler.IMenuMessageHandler;
 import com.wechat.message.handler.StateHandler;
 import com.wechat.message.reply.IMessageReply;
 import com.wechat.message.reply.impl.UserRedirectMessageReply;
+import com.wechat.mvc.context.ContextUtil;
 
 public class OrderMessageHandler implements IClickEventMessageHandler, IMenuMessageHandler {
 
@@ -18,7 +18,7 @@ public class OrderMessageHandler implements IClickEventMessageHandler, IMenuMess
 
 	@Override
 	public IMessageReply handleMessage(Message message, StateHandler state) {
-		String appPath = Config.getHost(UserContext.current().getRequest());
+		String appPath = ContextUtil.getHost(UserContext.current().getRequest());
 		UserRedirectMessageReply reply = new UserRedirectMessageReply(message);
 		reply.setDescription("description");
 		reply.setTitle("title");

@@ -1,8 +1,8 @@
-package com.site;
+package com.wechat.mvc.context;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class Config {
+public class ContextUtil {
 
 	public static String getHost(HttpServletRequest request) {
 		String fmt = "http://%s:%d%s/";
