@@ -64,4 +64,28 @@ public class OrderMessageTest {
 		}
 	}
 
+	@Test
+	public void testReal() {
+		String appPath = "http://95wechat.duapp.com:80/";
+		try {
+			HttpClient client = new HttpClient("http://95wechat.duapp.com/message");
+			String picUrl = appPath + "img/banner.jpg";
+			String url = appPath + "order/index/" + user.getOpenId();
+			XmlObject req = Common.createClickEventMessage(user.getOpenId(), "ORDER");
+			String resStr = client.post(req.toXmlString());
+			XmlObject res = XmlObject.toXmlObject(resStr);
+			System.out.println(res.toXmlString());
+			assertEquals(res.get("MsgType").getText(), "news");
+			assertEquals(res.get("ArticleCount").getText(), "1");
+			res = res.get("Articles").get("item");
+			assertEquals(res.get("Title").getText(), "title");
+			assertEquals(res.get("Description").getText(), "description");
+			assertEquals(res.get("PicUrl").getText(), picUrl);
+			assertEquals(res.get("Url").getText(), url);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 }
