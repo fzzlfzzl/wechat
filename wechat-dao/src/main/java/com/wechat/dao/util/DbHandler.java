@@ -2,7 +2,6 @@ package com.wechat.dao.util;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
@@ -31,22 +30,38 @@ public class DbHandler {
 	private Configuration configuration;
 	private ServiceRegistry serviceRegistry;
 	private JdbcServices jdbcServices;
+	private Connection conn;
 
-	public DbHandler(String db, String user, String pwd) throws Exception {
+	public void close() {
+		try {
+			conn.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public DbHandler(String db, String user, String pwd) {
 		Document doc = getSpecConfig(db, user, pwd);
 		configuration = ConfigurationUtil.buildConfiguration(doc);
 		serviceRegistry = ConfigurationUtil.buildServiceRegistry(configuration);
 		jdbcServices = serviceRegistry.getService(JdbcServices.class);
+		try {
+			conn = jdbcServices.getConnectionProvider().getConnection();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	@SuppressWarnings("deprecation")
-	public List<SchemaUpdateScript> generateSchemaUpdateScriptList() throws Exception {
-		JdbcServices jdbcServices = serviceRegistry.getService(JdbcServices.class);
-		Dialect dialect = jdbcServices.getDialect();
-		Connection connection = jdbcServices.getConnectionProvider().getConnection();
-		DatabaseMetadata meta = new DatabaseMetadata(connection, dialect, configuration);
-		List<SchemaUpdateScript> scripts = configuration.generateSchemaUpdateScriptList(dialect, meta);
-		return scripts;
+	public List<SchemaUpdateScript> generateSchemaUpdateScriptList() {
+		try {
+			Dialect dialect = jdbcServices.getDialect();
+			DatabaseMetadata meta = new DatabaseMetadata(conn, dialect, configuration);
+			List<SchemaUpdateScript> scripts = configuration.generateSchemaUpdateScriptList(dialect, meta);
+			return scripts;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public void dropTables() {
@@ -63,11 +78,10 @@ public class DbHandler {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public List<String> getTables() {
 		ArrayList<String> list = new ArrayList<String>();
 		try {
-			DatabaseMetaData md = jdbcServices.getConnectionProvider().getConnection().getMetaData();
+			DatabaseMetaData md = conn.getMetaData();
 			ResultSet rs = md.getTables(null, "%", "%", null);
 			while (rs.next()) {
 				list.add(rs.getString("TABLE_NAME"));
@@ -78,11 +92,11 @@ public class DbHandler {
 		return list;
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean execute(String sql) {
+		System.out.println(sql);
 		Statement stmt;
 		try {
-			stmt = jdbcServices.getConnectionProvider().getConnection().createStatement();
+			stmt = conn.createStatement();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -110,8 +124,7 @@ public class DbHandler {
 			String line = null;
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			while ((line = br.readLine()) != null) {
-				if (!execute(line))
-					return false;
+				execute(line);
 			}
 			return true;
 		} catch (Exception e) {
@@ -127,30 +140,34 @@ public class DbHandler {
 		return false;
 	}
 
-	private InputStream trim(String path) throws IOException {
-		InputStream is = ConfigHelper.getResourceAsStream(path);
-		StringBuffer sb = new StringBuffer();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		String line = null;
-		boolean trim = false;
-		while ((line = br.readLine()) != null) {
-			if (trim && line.trim().endsWith(">")) {
-				trim = false;
-				continue;
-			} else if (trim) {
-				continue;
-			} else if (line.trim().startsWith("<!DOCTYPE")) {
-				trim = true;
-				continue;
-			} else {
-				sb.append(line);
+	private InputStream trim(String path) {
+		try {
+			InputStream is = ConfigHelper.getResourceAsStream(path);
+			StringBuffer sb = new StringBuffer();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			String line = null;
+			boolean trim = false;
+			while ((line = br.readLine()) != null) {
+				if (trim && line.trim().endsWith(">")) {
+					trim = false;
+					continue;
+				} else if (trim) {
+					continue;
+				} else if (line.trim().startsWith("<!DOCTYPE")) {
+					trim = true;
+					continue;
+				} else {
+					sb.append(line);
+				}
 			}
+			ByteArrayInputStream ret = new ByteArrayInputStream(sb.toString().getBytes());
+			return ret;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
-		ByteArrayInputStream ret = new ByteArrayInputStream(sb.toString().getBytes());
-		return ret;
 	}
 
-	private Document getSpecConfig(String db, String user, String pwd) throws Exception {
+	private Document getSpecConfig(String db, String user, String pwd) {
 		String url = "jdbc:mysql://127.0.0.1:3306/" + db;
 		InputStream is = trim(HIBERNATE_CFG_XML);
 		XmlObject obj = XmlObject.readFromStream(is);

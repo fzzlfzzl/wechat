@@ -12,6 +12,7 @@
 		<module>wechat-web</module>
 		<module>wechat-message</module>
 		<module>wechat-manage</module>
+		<module>wechat-util</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
