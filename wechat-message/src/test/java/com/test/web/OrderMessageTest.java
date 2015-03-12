@@ -3,6 +3,7 @@ package com.test.web;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -41,7 +42,6 @@ public class OrderMessageTest {
 			return;
 		}
 		String appPath = "http://127.0.0.1:8080/wechat-message/";
-
 		try {
 			HttpClient client = new HttpClient("http://127.0.0.1:8080/wechat-message/message");
 			String picUrl = appPath + "img/banner.jpg";
@@ -57,7 +57,6 @@ public class OrderMessageTest {
 			assertEquals(res.get("Description").getText(), "description");
 			assertEquals(res.get("PicUrl").getText(), picUrl);
 			assertEquals(res.get("Url").getText(), url);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -82,10 +81,12 @@ public class OrderMessageTest {
 			assertEquals(res.get("Description").getText(), "description");
 			assertEquals(res.get("PicUrl").getText(), picUrl);
 			assertEquals(res.get("Url").getText(), url);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
+		} catch (RuntimeException e) {
+			if (e.getCause() instanceof UnknownHostException) {
+			} else {
+				e.printStackTrace();
+				fail();
+			}
 		}
 	}
 }
