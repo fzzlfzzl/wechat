@@ -2,7 +2,7 @@ package com.wechat.message.handler;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.web.dao.entity.Message;
+import com.wechat.dao.entity.Message;
 import com.wechat.message.factory.MessageHandlerFactory;
 import com.wechat.message.reply.IMessageReply;
 

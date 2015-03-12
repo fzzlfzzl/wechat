@@ -5,7 +5,7 @@ import com.service.wechat.Const.MenuName;
 import com.service.wechat.Const.Msg;
 import com.service.wechat.Const.MsgReply;
 import com.service.wechat.Const.Type;
-import com.web.dao.entity.Message;
+import com.wechat.dao.entity.Message;
 import com.wechat.message.handler.IClickEventMessageHandler;
 import com.wechat.message.handler.IMenuMessageHandler;
 import com.wechat.message.handler.StateHandler;

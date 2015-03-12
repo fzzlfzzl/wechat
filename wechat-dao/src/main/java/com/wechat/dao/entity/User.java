@@ -1,4 +1,4 @@
-package com.web.dao.entity;
+package com.wechat.dao.entity;
 
 import java.util.ArrayList;
 import java.util.List;

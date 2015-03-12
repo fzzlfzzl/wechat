@@ -7,9 +7,9 @@ import org.hibernate.Session;
 import org.junit.Test;
 
 import com.test.util.Common;
-import com.web.dao.db.HibernateUtil;
-import com.web.dao.entity.Message;
-import com.web.dao.entity.User;
+import com.wechat.dao.db.HibernateUtil;
+import com.wechat.dao.entity.Message;
+import com.wechat.dao.entity.User;
 
 public class SessionTest {
 

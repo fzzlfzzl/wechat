@@ -1,6 +1,6 @@
 package com.wechat.message.reply.impl;
 
-import com.web.dao.entity.Message;
+import com.wechat.dao.entity.Message;
 
 public class UserRedirectMessageReply extends MessageReply {
 

@@ -4,8 +4,8 @@ import org.hibernate.Session;
 import org.junit.Test;
 
 import com.site.util.Util;
-import com.web.dao.db.HibernateUtil;
-import com.web.dao.entity.Orders;
+import com.wechat.dao.db.HibernateUtil;
+import com.wechat.dao.entity.Orders;
 
 public class OrderDaoTest {
 

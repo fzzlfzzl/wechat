@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 
 import com.site.util.XmlObject;
-import com.web.dao.db.ConfigurationUtil;
+import com.wechat.dao.db.ConfigurationUtil;
 
 public class ExportCreateTableScript {
 
@@ -47,6 +47,7 @@ public class ExportCreateTableScript {
 			bw.write(script.getScript());
 			bw.newLine();
 		}
+		bw.flush();
 		bw.close();
 	}
 

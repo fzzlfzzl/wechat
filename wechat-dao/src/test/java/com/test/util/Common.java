@@ -1,8 +1,8 @@
 package com.test.util;
 
 import com.site.util.Util;
-import com.web.dao.entity.Message;
-import com.web.dao.entity.User;
+import com.wechat.dao.entity.Message;
+import com.wechat.dao.entity.User;
 
 public class Common {
 

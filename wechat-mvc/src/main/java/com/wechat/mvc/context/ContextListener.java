@@ -6,7 +6,7 @@ import javax.servlet.ServletContextListener;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import com.web.dao.db.HibernateUtil;
+import com.wechat.dao.db.HibernateUtil;
 
 public class ContextListener implements ServletContextListener {
 

@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.web.controller.base.WebController;
-import com.web.dao.entity.Admin;
 import com.web.interceptor.annotation.AuthSuperAdmin;
 import com.web.service.SuperAdminService;
 import com.web.view.View;
 import com.web.view.site.sa.AdminListView;
+import com.wechat.dao.entity.Admin;
 
 @Controller
 @RequestMapping("/sa")

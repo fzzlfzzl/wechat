@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.web.dao.entity.Admin;
-import com.web.dao.impl.AdminDao;
+import com.wechat.dao.entity.Admin;
+import com.wechat.dao.impl.AdminDao;
 
 public class AdminDaoTest {
 

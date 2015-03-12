@@ -1,6 +1,6 @@
 package com.wechat.message.handler.impl;
 
-import com.web.dao.entity.Message;
+import com.wechat.dao.entity.Message;
 import com.wechat.message.handler.IMessageHandler;
 import com.wechat.message.handler.StateHandler;
 import com.wechat.message.reply.IMessageReply;

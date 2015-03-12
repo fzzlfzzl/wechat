@@ -1,10 +1,10 @@
-package com.web.dao.impl;
+package com.wechat.dao.impl;
 
 import java.util.List;
 
 import org.hibernate.Session;
 
-import com.web.dao.entity.AccessToken;
+import com.wechat.dao.entity.AccessToken;
 
 public class AccessTokenDao extends Dao {
 

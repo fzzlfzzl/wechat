@@ -2,9 +2,9 @@ package com.web.view.site.admin;
 
 import java.util.List;
 
-import com.web.dao.entity.User;
 import com.web.view.View;
 import com.web.view.impl.template.TemplateViewExpression;
+import com.wechat.dao.entity.User;
 
 public class UserListView extends View {
 

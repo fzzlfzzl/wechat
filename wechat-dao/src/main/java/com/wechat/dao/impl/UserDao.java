@@ -1,12 +1,12 @@
-package com.web.dao.impl;
+package com.wechat.dao.impl;
 
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.web.dao.entity.Message;
-import com.web.dao.entity.User;
+import com.wechat.dao.entity.Message;
+import com.wechat.dao.entity.User;
 
 public class UserDao extends Dao {
 

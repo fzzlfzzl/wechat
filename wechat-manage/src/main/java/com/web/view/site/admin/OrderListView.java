@@ -2,9 +2,9 @@ package com.web.view.site.admin;
 
 import java.util.List;
 
-import com.web.dao.entity.Orders;
 import com.web.view.View;
 import com.web.view.impl.composite.HtmlTag;
+import com.wechat.dao.entity.Orders;
 
 public class OrderListView extends View {
 

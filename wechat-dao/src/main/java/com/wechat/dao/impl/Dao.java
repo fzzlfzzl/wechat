@@ -1,4 +1,4 @@
-package com.web.dao.impl;
+package com.wechat.dao.impl;
 
 import org.hibernate.Session;
 

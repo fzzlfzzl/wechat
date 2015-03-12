@@ -2,9 +2,9 @@ package com.web.service;
 
 import com.service.wechat.Const.Auth;
 import com.site.util.Util;
-import com.web.dao.entity.Admin;
-import com.web.dao.impl.AdminDao;
 import com.web.interceptor.context.UserContext;
+import com.wechat.dao.entity.Admin;
+import com.wechat.dao.impl.AdminDao;
 
 public class AdminService {
 

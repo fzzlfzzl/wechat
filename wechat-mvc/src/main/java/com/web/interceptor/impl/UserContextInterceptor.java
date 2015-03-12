@@ -7,9 +7,9 @@ import org.hibernate.Session;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.web.dao.db.HibernateUtil;
 import com.web.interceptor.context.UserContext;
 import com.web.interceptor.context.UserContextPool;
+import com.wechat.dao.db.HibernateUtil;
 
 public class UserContextInterceptor extends HandlerInterceptorAdapter {
 

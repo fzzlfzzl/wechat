@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.web.controller.base.WebController;
-import com.web.dao.entity.Orders;
-import com.web.dao.entity.User;
-import com.web.dao.impl.UserDao;
 import com.web.interceptor.annotation.AuthAdmin;
 import com.web.interceptor.context.UserContext;
 import com.web.interceptor.context.UserContextPool;
@@ -21,6 +18,9 @@ import com.web.view.View;
 import com.web.view.site.admin.MessageListView;
 import com.web.view.site.admin.OrderListView;
 import com.web.view.site.admin.UserListView;
+import com.wechat.dao.entity.Orders;
+import com.wechat.dao.entity.User;
+import com.wechat.dao.impl.UserDao;
 
 @Controller
 @RequestMapping("/admin")

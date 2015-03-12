@@ -1,6 +1,6 @@
 package com.wechat.message.reply.impl;
 
-import com.web.dao.entity.Message;
+import com.wechat.dao.entity.Message;
 import com.wechat.message.reply.ITextMessageReply;
 
 public class TextMessageReply extends MessageReply implements ITextMessageReply {

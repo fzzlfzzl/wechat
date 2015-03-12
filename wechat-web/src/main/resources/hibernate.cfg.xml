@@ -27,10 +27,10 @@
 		<property name="show_sql">true</property>
 		<property name="hbm2ddl.auto">update</property>
 
-		<mapping class="com.web.dao.entity.User" />
-		<mapping class="com.web.dao.entity.Message" />
-		<mapping class="com.web.dao.entity.Admin" />
-		<mapping class="com.web.dao.entity.AccessToken" />
-		<mapping class="com.web.dao.entity.Orders" />
+		<mapping class="com.wechat.dao.entity.User" />
+		<mapping class="com.wechat.dao.entity.Message" />
+		<mapping class="com.wechat.dao.entity.Admin" />
+		<mapping class="com.wechat.dao.entity.AccessToken" />
+		<mapping class="com.wechat.dao.entity.Orders" />
 	</session-factory>
 </hibernate-configuration>

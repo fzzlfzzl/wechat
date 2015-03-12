@@ -1,4 +1,4 @@
-package com.web.dao.entity;
+package com.wechat.dao.entity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

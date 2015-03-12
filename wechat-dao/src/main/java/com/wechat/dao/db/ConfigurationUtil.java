@@ -1,4 +1,4 @@
-package com.web.dao.db;
+package com.wechat.dao.db;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

@@ -9,9 +9,9 @@ import org.junit.Test;
 import com.service.wechat.Const.MsgReply;
 import com.site.util.Util;
 import com.site.util.XmlObject;
-import com.web.dao.db.HibernateUtil;
 import com.web.interceptor.context.UserContext;
 import com.web.interceptor.context.UserContextPool;
+import com.wechat.dao.db.HibernateUtil;
 import com.wechat.message.WechatService;
 import com.wechat.message.handler.impl.AddressMessageHandler;
 

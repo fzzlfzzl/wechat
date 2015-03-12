@@ -14,9 +14,9 @@ import com.site.util.HttpClient;
 import com.site.util.Util;
 import com.site.util.XmlObject;
 import com.test.service.Common;
-import com.web.dao.db.HibernateUtil;
-import com.web.dao.entity.User;
-import com.web.dao.impl.UserDao;
+import com.wechat.dao.db.HibernateUtil;
+import com.wechat.dao.entity.User;
+import com.wechat.dao.impl.UserDao;
 
 public class OrderMessageTest {
 

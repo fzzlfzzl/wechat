@@ -1,4 +1,4 @@
-package com.web.dao.entity;
+package com.wechat.dao.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

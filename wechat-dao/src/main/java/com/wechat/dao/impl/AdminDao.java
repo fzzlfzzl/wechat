@@ -1,11 +1,11 @@
-package com.web.dao.impl;
+package com.wechat.dao.impl;
 
 import java.util.List;
 
 import org.hibernate.Session;
 
-import com.web.dao.db.HibernateUtil;
-import com.web.dao.entity.Admin;
+import com.wechat.dao.db.HibernateUtil;
+import com.wechat.dao.entity.Admin;
 
 public class AdminDao {
 

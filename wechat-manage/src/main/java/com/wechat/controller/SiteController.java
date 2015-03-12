@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.web.controller.base.WebController;
-import com.web.dao.entity.Orders;
 import com.web.interceptor.context.UserContext;
 import com.web.view.View;
 import com.web.view.site.admin.OrderListView;
+import com.wechat.dao.entity.Orders;
 
 @Controller
 @RequestMapping("/site")

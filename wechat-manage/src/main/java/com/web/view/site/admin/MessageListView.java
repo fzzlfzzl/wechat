@@ -2,9 +2,9 @@ package com.web.view.site.admin;
 
 import java.util.List;
 
-import com.web.dao.entity.Message;
 import com.web.view.View;
 import com.web.view.impl.composite.HtmlTag;
+import com.wechat.dao.entity.Message;
 
 public class MessageListView extends View {
 

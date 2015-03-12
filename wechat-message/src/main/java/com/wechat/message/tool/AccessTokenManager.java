@@ -5,9 +5,9 @@ import org.hibernate.Session;
 
 import com.site.util.HttpsClient;
 import com.site.util.JsonObject;
-import com.web.dao.entity.AccessToken;
-import com.web.dao.impl.AccessTokenDao;
 import com.web.interceptor.context.UserContext;
+import com.wechat.dao.entity.AccessToken;
+import com.wechat.dao.impl.AccessTokenDao;
 
 public class AccessTokenManager {
 
