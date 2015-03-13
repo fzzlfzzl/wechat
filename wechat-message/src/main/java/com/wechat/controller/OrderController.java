@@ -21,13 +21,14 @@ public class OrderController extends WebController {
 	public ModelAndView index(@PathVariable String openid) throws Exception {
 		ModelAndView ret = createNormalModelAndView("index");
 		ret.addObject("openid", openid);
+		ret.addObject("dealUrl", url("deal"));
 		return ret;
 	}
 
 	@RequestMapping(value = "/deal", method = RequestMethod.POST)
 	public ModelAndView deal(String openid, String dishes, String name, String telephone, String address)
 			throws Exception {
-		ModelAndView ret = createNormalModelAndView("deal");
+		ModelAndView ret = createAjaxModelAndView("deal");
 		Session session = UserContext.current().getSession();
 		session.beginTransaction();
 		Orders order = new Orders();

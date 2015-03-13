@@ -23,6 +23,17 @@ public class WebController {
 		return controller;
 	}
 
+	protected String url(String view) {
+		UserContext context = UserContext.current();
+		String url = null;
+		if (isSelfView(view)) {
+			url = String.format("%s/%s/%s", context.getRequest().getContextPath(), thisController(), view);
+		} else {
+			url = String.format("%s/%s", context.getRequest().getContextPath(), view);
+		}
+		return url;
+	}
+
 	protected String thisView(String view) {
 		String controller = thisController();
 		String ret = String.format("%s/%s", controller, view);
@@ -37,14 +48,17 @@ public class WebController {
 		}
 	}
 
+	protected ModelAndView createAjaxModelAndView(String view) {
+		if (isSelfView(view)) {
+			return new ModelAndView(thisView(view));
+		} else {
+			return new ModelAndView(view);
+		}
+	}
+
 	protected ModelAndView createRedirectModelAndView(String view) {
 		UserContext context = UserContext.current();
-		String url = null;
-		if (isSelfView(view)) {
-			url = String.format("%s/%s/%s", context.getRequest().getContextPath(), thisController(), view);
-		} else {
-			url = String.format("%s/%s", context.getRequest().getContextPath(), view);
-		}
+		String url = url(view);
 		try {
 			context.getResponse().sendRedirect(url);
 		} catch (IOException e) {
