@@ -38,6 +38,16 @@ public class ConfigurationUtil {
 		}
 	}
 
+	public static Configuration buildConfiguration(String path) {
+		try {
+			Configuration configuration = new Configuration();
+			configuration.configure(path);
+			return configuration;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	public static Configuration buildConfiguration(Document doc) {
 		try {
 			Configuration configuration = new Configuration();
