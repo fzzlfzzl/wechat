@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.site.util.ExceptionLogger;
-import com.site.util.Util;
-import com.site.util.XmlObject;
 import com.web.interceptor.context.UserContext;
+import com.wechat.common.util.ExceptionLogger;
+import com.wechat.common.util.Util;
+import com.wechat.common.util.XmlObject;
 import com.wechat.dao.entity.Message;
 import com.wechat.dao.entity.User;
 import com.wechat.dao.impl.UserDao;

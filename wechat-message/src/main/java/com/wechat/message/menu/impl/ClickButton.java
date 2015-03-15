@@ -1,6 +1,6 @@
 package com.wechat.message.menu.impl;
 
-import com.site.util.JsonObject;
+import com.wechat.common.util.JsonObject;
 import com.wechat.message.menu.IButton;
 
 public class ClickButton implements IButton {

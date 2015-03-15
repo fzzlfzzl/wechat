@@ -1,6 +1,6 @@
 package com.wechat.message.factory;
 
-import com.service.wechat.Const.Type;
+import com.wechat.common.Const.Type;
 import com.wechat.dao.entity.Message;
 import com.wechat.message.handler.IMessageHandler;
 import com.wechat.message.handler.impl.AddressMessageHandler;

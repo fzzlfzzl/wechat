@@ -1,6 +1,6 @@
 package com.test.util;
 
-import com.site.util.Util;
+import com.wechat.common.util.Util;
 import com.wechat.dao.entity.Message;
 import com.wechat.dao.entity.User;
 

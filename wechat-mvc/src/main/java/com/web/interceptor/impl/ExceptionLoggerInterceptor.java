@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.site.util.ExceptionLogger;
+import com.wechat.common.util.ExceptionLogger;
 
 public class ExceptionLoggerInterceptor extends HandlerInterceptorAdapter {
 

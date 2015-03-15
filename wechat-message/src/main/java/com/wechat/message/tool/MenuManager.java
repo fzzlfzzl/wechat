@@ -2,8 +2,8 @@ package com.wechat.message.tool;
 
 import org.apache.log4j.Logger;
 
-import com.site.util.HttpsClient;
-import com.site.util.JsonObject;
+import com.wechat.common.util.HttpsClient;
+import com.wechat.common.util.JsonObject;
 import com.wechat.message.handler.impl.OrderMessageHandler;
 import com.wechat.message.menu.impl.ClickButton;
 import com.wechat.message.menu.impl.MainButton;

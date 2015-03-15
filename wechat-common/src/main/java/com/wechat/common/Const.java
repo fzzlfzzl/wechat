@@ -1,4 +1,4 @@
-package com.service.wechat;
+package com.wechat.common;
 
 public interface Const {
 

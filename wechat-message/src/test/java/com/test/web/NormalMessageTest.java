@@ -5,9 +5,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.site.util.HttpClient;
-import com.site.util.XmlObject;
 import com.test.service.Common;
+import com.wechat.common.util.HttpClient;
+import com.wechat.common.util.XmlObject;
 
 public class NormalMessageTest {
 

@@ -1,4 +1,4 @@
-package com.site.util;
+package com.wechat.common.util;
 
 public class ByteBuffer {
 

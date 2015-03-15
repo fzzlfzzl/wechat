@@ -10,7 +10,7 @@ import com.wechat.dao.util.DbHandler;
 public class DbUpdateValidater {
 
 	public static void main(String[] args) throws Exception {
-		DbHandler handler = new DbHandler("test", "root", "root");
+		DbHandler handler = new DbHandler();
 		String srcPath = "E:/workspace/wechat/wechat-dao/src/test/resources/wechat.sql.20150312";
 		String update = "E:/workspace/wechat/wechat-dao/src/test/resources/wechat.sql.20150312-20150313";
 		handler.dropTables();

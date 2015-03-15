@@ -6,11 +6,11 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.service.wechat.Const.MsgReply;
-import com.site.util.Util;
-import com.site.util.XmlObject;
 import com.web.interceptor.context.UserContext;
 import com.web.interceptor.context.UserContextPool;
+import com.wechat.common.Const.MsgReply;
+import com.wechat.common.util.Util;
+import com.wechat.common.util.XmlObject;
 import com.wechat.dao.db.HibernateUtil;
 import com.wechat.message.WechatService;
 import com.wechat.message.handler.impl.AddressMessageHandler;

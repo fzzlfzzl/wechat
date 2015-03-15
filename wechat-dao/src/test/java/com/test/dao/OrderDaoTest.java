@@ -3,7 +3,7 @@ package com.test.dao;
 import org.hibernate.Session;
 import org.junit.Test;
 
-import com.site.util.Util;
+import com.wechat.common.util.Util;
 import com.wechat.dao.db.HibernateUtil;
 import com.wechat.dao.entity.Orders;
 

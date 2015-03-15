@@ -3,9 +3,9 @@ package com.wechat.message.tool;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
-import com.site.util.HttpsClient;
-import com.site.util.JsonObject;
 import com.web.interceptor.context.UserContext;
+import com.wechat.common.util.HttpsClient;
+import com.wechat.common.util.JsonObject;
 import com.wechat.dao.entity.AccessToken;
 import com.wechat.dao.impl.AccessTokenDao;
 

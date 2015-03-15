@@ -1,7 +1,6 @@
 package com.wechat.dao.util;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
@@ -15,18 +14,15 @@ import java.util.List;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.jdbc.spi.JdbcServices;
-import org.hibernate.internal.util.ConfigHelper;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.tool.hbm2ddl.DatabaseMetadata;
 import org.hibernate.tool.hbm2ddl.SchemaUpdateScript;
-import org.w3c.dom.Document;
 
-import com.site.util.XmlObject;
+import com.wechat.dao.db.BuildOption;
 import com.wechat.dao.db.ConfigurationUtil;
 
 public class DbHandler {
 
-	private static final String HIBERNATE_CFG_XML = "hibernate.cfg.xml";
 	private Configuration configuration;
 	private ServiceRegistry serviceRegistry;
 	private JdbcServices jdbcServices;
@@ -41,9 +37,8 @@ public class DbHandler {
 	}
 
 	@SuppressWarnings("deprecation")
-	public DbHandler(String db, String user, String pwd) {
-		Document doc = getSpecConfig(db, user, pwd);
-		configuration = ConfigurationUtil.buildConfiguration(doc);
+	public DbHandler() {
+		configuration = ConfigurationUtil.buildConfiguration(BuildOption.Test);
 		serviceRegistry = ConfigurationUtil.buildServiceRegistry(configuration);
 		jdbcServices = serviceRegistry.getService(JdbcServices.class);
 		try {
@@ -140,50 +135,4 @@ public class DbHandler {
 		return false;
 	}
 
-	private InputStream trim(String path) {
-		try {
-			InputStream is = ConfigHelper.getResourceAsStream(path);
-			StringBuffer sb = new StringBuffer();
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-			String line = null;
-			boolean trim = false;
-			while ((line = br.readLine()) != null) {
-				if (trim && line.trim().endsWith(">")) {
-					trim = false;
-					continue;
-				} else if (trim) {
-					continue;
-				} else if (line.trim().startsWith("<!DOCTYPE")) {
-					trim = true;
-					continue;
-				} else {
-					sb.append(line);
-				}
-			}
-			ByteArrayInputStream ret = new ByteArrayInputStream(sb.toString().getBytes());
-			return ret;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	private Document getSpecConfig(String db, String user, String pwd) {
-		String url = "jdbc:mysql://127.0.0.1:3306/" + db;
-		InputStream is = trim(HIBERNATE_CFG_XML);
-		XmlObject obj = XmlObject.readFromStream(is);
-		XmlObject sessionFactory = obj.get("session-factory");
-		int length = sessionFactory.getLength("property");
-		for (int i = 0; i < length; i++) {
-			XmlObject property = sessionFactory.get("property", i);
-			String name = property.getAttribute("name");
-			if (name.equals("connection.url")) {
-				property.setText(url);
-			} else if (name.equals("connection.username")) {
-				property.setText(user);
-			} else if (name.equals("connection.password")) {
-				property.setText(pwd);
-			}
-		}
-		return XmlObject.Convert.toDocument(obj);
-	}
 }

@@ -1,4 +1,4 @@
-package com.site.util;
+package com.wechat.common.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;

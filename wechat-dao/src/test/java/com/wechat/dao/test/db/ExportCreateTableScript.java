@@ -18,7 +18,7 @@ public class ExportCreateTableScript {
 		path = path.replace("target/test-classes/", "src/test/resources/wechat.sql");
 		System.out.println(path);
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path)));
-		DbHandler handler = new DbHandler("test", "root", "root");
+		DbHandler handler = new DbHandler();
 		List<SchemaUpdateScript> scripts = handler.generateSchemaUpdateScriptList();
 		for (SchemaUpdateScript script : scripts) {
 			System.out.println(script.getScript());

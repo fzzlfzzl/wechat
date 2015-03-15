@@ -1,10 +1,10 @@
 package com.wechat.message.handler.impl;
 
-import com.service.wechat.Const.EventKey;
-import com.service.wechat.Const.MenuName;
-import com.service.wechat.Const.Msg;
-import com.service.wechat.Const.MsgReply;
-import com.service.wechat.Const.Type;
+import com.wechat.common.Const.EventKey;
+import com.wechat.common.Const.MenuName;
+import com.wechat.common.Const.Msg;
+import com.wechat.common.Const.MsgReply;
+import com.wechat.common.Const.Type;
 import com.wechat.dao.entity.Message;
 import com.wechat.message.handler.IClickEventMessageHandler;
 import com.wechat.message.handler.IMenuMessageHandler;

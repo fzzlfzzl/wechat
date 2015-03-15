@@ -8,8 +8,8 @@ import static org.junit.Assert.fail;
 import org.hibernate.Session;
 import org.junit.Test;
 
-import com.site.util.Util;
 import com.test.util.Common;
+import com.wechat.common.util.Util;
 import com.wechat.dao.db.HibernateUtil;
 import com.wechat.dao.entity.Message;
 import com.wechat.dao.entity.User;

@@ -1,4 +1,4 @@
-package com.site.util;
+package com.wechat.common.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -16,8 +16,8 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.xml.sax.InputSource;
 
-public class XmlObject {
 
+public class XmlObject {
 	private Document doc;
 	private Element element;
 
@@ -55,8 +55,16 @@ public class XmlObject {
 		}
 	}
 
+	public void add(XmlObject obj) {
+		element.addContent(obj.element);
+	}
+
 	public String getAttribute(String key) {
 		return element.getAttributeValue(key);
+	}
+
+	public void setAttribute(String key, String value) {
+		element.setAttribute(key, value);
 	}
 
 	public int getLength(String key) {

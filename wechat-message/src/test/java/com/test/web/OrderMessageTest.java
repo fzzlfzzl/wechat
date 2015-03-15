@@ -10,10 +10,10 @@ import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.site.util.HttpClient;
-import com.site.util.Util;
-import com.site.util.XmlObject;
 import com.test.service.Common;
+import com.wechat.common.util.HttpClient;
+import com.wechat.common.util.Util;
+import com.wechat.common.util.XmlObject;
 import com.wechat.dao.db.HibernateUtil;
 import com.wechat.dao.entity.User;
 import com.wechat.dao.impl.UserDao;

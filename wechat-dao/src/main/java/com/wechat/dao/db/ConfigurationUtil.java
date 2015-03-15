@@ -2,75 +2,106 @@ package com.wechat.dao.db;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.internal.util.ConfigHelper;
 import org.hibernate.service.ServiceRegistry;
 import org.w3c.dom.Document;
 
-import com.site.util.Util;
-import com.site.util.XmlObject;
+import com.wechat.common.util.ClassUtil;
+import com.wechat.common.util.Util;
+import com.wechat.common.util.XmlObject;
 
 public class ConfigurationUtil {
 
+	private static final String defaultPackage = "com.dao.entity";
 	private static Logger logger = Logger.getLogger(ConfigurationUtil.class);
-	private static String defaultPath = "hibernate.cfg.xml";
 
 	public static Configuration buildDefaultConfiguration() {
+		BuildOption option = BuildOption.Online;
+		if (Util.isDevelopEnvironment()) {
+			logger.info("Development Environment");
+			option = BuildOption.Development;
+		}
+		return buildConfiguration(option);
+	}
+
+	public static Configuration buildConfiguration(BuildOption option) {
+		XmlObject conf = getConfObject(option);
+		Configuration configuration = new Configuration();
+		Document doc = XmlObject.Convert.toDocument(conf);
+		configuration.configure(doc);
+		return configuration;
+	}
+
+	private static XmlObject getConfObject(BuildOption option) {
 		try {
-			Configuration configuration = new Configuration();
-			if (Util.isDevelopEnvironment()) {
-				logger.info("Development Environment");
-				Document developConfig = getDevelopConfig();
-				configuration.configure(developConfig);
-			} else {
-				logger.info("Online Environment");
-				configuration.configure(defaultPath);
+			InputStream is = ClassLoader.getSystemResourceAsStream(option.getPath());
+			InputStream trimIs = trim(is);
+			XmlObject conf = XmlObject.readFromStream(trimIs);
+			is.close();
+			trimIs.close();
+			forOption(conf, option);
+			addEntityInfo(conf);
+			return conf;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private static void addEntityInfo(XmlObject conf) {
+		Set<String> classNames = ClassUtil.getClassName(defaultPackage);
+		for (String name : classNames) {
+			XmlObject mapping = new XmlObject("mapping");
+			mapping.setAttribute("class", name);
+			conf.get("hibernate-configuration").get("session-factory").add(mapping);
+		}
+	}
+
+	/**
+	 * @param is
+	 * 
+	 *            去掉hibernate xml第一行的DOC
+	 * @return
+	 */
+	private static InputStream trim(InputStream is) {
+		try {
+			StringBuffer sb = new StringBuffer();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			String line = null;
+			boolean trim = false;
+
+			while ((line = br.readLine()) != null) {
+				if (trim && line.trim().endsWith(">")) {
+					trim = false;
+					continue;
+				} else if (trim) {
+					continue;
+				} else if (line.trim().startsWith("<!DOCTYPE")) {
+					trim = true;
+					continue;
+				} else {
+					sb.append(line);
+				}
 			}
-			return configuration;
-		} catch (Exception e) {
+			ByteArrayInputStream ret = new ByteArrayInputStream(sb.toString().getBytes());
+			return ret;
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public static Configuration buildConfiguration(String path) {
-		try {
-			Configuration configuration = new Configuration();
-			configuration.configure(path);
-			return configuration;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public static Configuration buildConfiguration(Document doc) {
-		try {
-			Configuration configuration = new Configuration();
-			configuration.configure(doc);
-			return configuration;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public static ServiceRegistry buildServiceRegistry(Configuration configuration) {
-		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-				configuration.getProperties()).build();
-		return serviceRegistry;
-	}
-
-	private static Document getDevelopConfig() throws Exception {
-		String url = "jdbc:mysql://127.0.0.1:3306/wechat";
-		String user = "root";
-		String pwd = "root";
-		InputStream is = trim(defaultPath);
-		XmlObject obj = XmlObject.readFromStream(is);
-		XmlObject sessionFactory = obj.get("session-factory");
+	private static void forOption(XmlObject conf, BuildOption option) {
+		String url = "jdbc:mysql://127.0.0.1:3306/" + option.getDb();
+		String user = option.getUser();
+		String pwd = option.getPwd();
+		XmlObject sessionFactory = conf.get("session-factory");
 		int length = sessionFactory.getLength("property");
 		for (int i = 0; i < length; i++) {
 			XmlObject property = sessionFactory.get("property", i);
@@ -83,30 +114,13 @@ public class ConfigurationUtil {
 				property.setText(pwd);
 			}
 		}
-		logger.info(obj.toXmlString());
-		return XmlObject.Convert.toDocument(obj);
+		logger.info(conf.toXmlString());
 	}
 
-	private static InputStream trim(String path) throws IOException {
-		InputStream is = ConfigHelper.getResourceAsStream(path);
-		StringBuffer sb = new StringBuffer();
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		String line = null;
-		boolean trim = false;
-		while ((line = br.readLine()) != null) {
-			if (trim && line.trim().endsWith(">")) {
-				trim = false;
-				continue;
-			} else if (trim) {
-				continue;
-			} else if (line.trim().startsWith("<!DOCTYPE")) {
-				trim = true;
-				continue;
-			} else {
-				sb.append(line);
-			}
-		}
-		ByteArrayInputStream ret = new ByteArrayInputStream(sb.toString().getBytes());
-		return ret;
+	public static ServiceRegistry buildServiceRegistry(Configuration configuration) {
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+				configuration.getProperties()).build();
+		return serviceRegistry;
 	}
+
 }

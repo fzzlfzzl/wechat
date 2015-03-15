@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.site.util.JsonObject;
+import com.wechat.common.util.JsonObject;
 import com.wechat.message.menu.impl.ClickButton;
 import com.wechat.message.menu.impl.MainButton;
 import com.wechat.message.menu.impl.SubButton;

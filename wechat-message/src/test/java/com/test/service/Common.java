@@ -2,7 +2,7 @@ package com.test.service;
 
 import java.net.Socket;
 
-import com.site.util.XmlObject;
+import com.wechat.common.util.XmlObject;
 
 public class Common {
 

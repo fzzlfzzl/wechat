@@ -2,9 +2,9 @@ package com.wechat.message.handler.impl;
 
 import org.apache.log4j.Logger;
 
-import com.service.wechat.Const.MsgReply;
-import com.service.wechat.Const.Type;
 import com.web.interceptor.context.UserContext;
+import com.wechat.common.Const.MsgReply;
+import com.wechat.common.Const.Type;
 import com.wechat.dao.entity.Message;
 import com.wechat.dao.entity.User;
 import com.wechat.dao.impl.UserDao;

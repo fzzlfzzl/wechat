@@ -1,9 +1,9 @@
 package com.wechat.message.handler.impl;
 
-import com.service.wechat.Const.EventKey;
-import com.service.wechat.Const.MenuName;
-import com.service.wechat.Const.MsgReply;
 import com.web.interceptor.context.UserContext;
+import com.wechat.common.Const.EventKey;
+import com.wechat.common.Const.MenuName;
+import com.wechat.common.Const.MsgReply;
 import com.wechat.dao.entity.Message;
 import com.wechat.dao.entity.User;
 import com.wechat.dao.impl.UserDao;

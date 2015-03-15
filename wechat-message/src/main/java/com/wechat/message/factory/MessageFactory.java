@@ -1,6 +1,6 @@
 package com.wechat.message.factory;
 
-import com.site.util.XmlObject;
+import com.wechat.common.util.XmlObject;
 import com.wechat.dao.entity.Message;
 
 public class MessageFactory {

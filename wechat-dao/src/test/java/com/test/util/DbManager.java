@@ -16,7 +16,7 @@ import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
 import org.w3c.dom.Document;
 
-import com.site.util.XmlObject;
+import com.wechat.common.util.XmlObject;
 
 public class DbManager {
 

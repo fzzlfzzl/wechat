@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.site.util.ByteBuffer;
+import com.wechat.common.util.ByteBuffer;
 
 public class ByteBufferTest {
 
