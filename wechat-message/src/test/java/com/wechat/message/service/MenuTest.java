@@ -1,4 +1,4 @@
-package com.test.service;
+package com.wechat.message.service;
 
 import static org.junit.Assert.assertEquals;
 

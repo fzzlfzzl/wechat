@@ -1,13 +1,13 @@
-package com.test.web;
+package com.wechat.message.web;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.test.service.Common;
 import com.wechat.common.util.HttpClient;
 import com.wechat.common.util.XmlObject;
+import com.wechat.message.service.Common;
 
 public class NormalMessageTest {
 

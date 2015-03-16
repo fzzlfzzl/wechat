@@ -1,4 +1,4 @@
-package com.test.web;
+package com.wechat.message.web;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -10,13 +10,13 @@ import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.test.service.Common;
 import com.wechat.common.util.HttpClient;
 import com.wechat.common.util.Util;
 import com.wechat.common.util.XmlObject;
 import com.wechat.dao.db.HibernateUtil;
 import com.wechat.dao.entity.User;
 import com.wechat.dao.impl.UserDao;
+import com.wechat.message.service.Common;
 
 public class OrderMessageTest {
 

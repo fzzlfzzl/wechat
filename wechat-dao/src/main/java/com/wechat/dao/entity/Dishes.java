@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  * @author Administrator
@@ -21,7 +23,8 @@ public class Dishes {
 	private long id;
 
 	private String name;
-
+	@OneToMany
+	@JoinColumn(name = "dishes_id")
 	private List<Option> options = new ArrayList<Option>();
 
 	public String getName() {
