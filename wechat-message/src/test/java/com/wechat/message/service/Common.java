@@ -1,10 +1,14 @@
-package com.test.service;
+package com.wechat.message.service;
 
 import java.net.Socket;
+
+import org.apache.log4j.Logger;
 
 import com.wechat.common.util.XmlObject;
 
 public class Common {
+
+	public static Logger logger = Logger.getLogger(Common.class);
 
 	public static final String APP_NAME = "gh_5cb711bbf02b";
 

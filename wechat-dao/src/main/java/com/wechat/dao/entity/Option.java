@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+/**
+ * @author yml
+ *
+ *         不可变对象,dao不提供修改接口
+ */
 @Entity
 public class Option {
 
@@ -17,7 +23,7 @@ public class Option {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "option_id")
 	private List<OptionItem> items = new ArrayList<OptionItem>();
 

@@ -1,4 +1,4 @@
-package com.test.service;
+package com.wechat.message.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,6 +18,15 @@ import com.wechat.message.handler.impl.AddressMessageHandler;
 public class ServiceTest {
 
 	static Logger logger = Logger.getLogger("Test");
+
+	// @Test
+	// public void tmp() {
+	// List<Class<?>> ret = ClassUtil2.getClasses("com.wechat.dao.entity");
+	// assert (ret != null);
+	// for (int i = 0; i < ret.size(); i++) {
+	// System.out.println(ret.get(i).getName());
+	// }
+	// }
 
 	@Before
 	public void setup() {

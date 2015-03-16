@@ -4,11 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-import org.apache.log4j.Logger;
-
 public class HttpTestClient {
 
-	private static Logger logger = Logger.getLogger(HttpTestClient.class);
+	// private static Logger logger = Logger.getLogger(HttpTestClient.class);
 
 	private String host;
 	private int port;
@@ -77,7 +75,6 @@ public class HttpTestClient {
 	public String get() throws Exception {
 		Socket socket = new Socket(host, port);
 		String req = getHeader() + getTail();
-		logger.error("\n" + req);
 		socket.getOutputStream().write(req.getBytes());
 		StringBuffer sb = new StringBuffer();
 		BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -85,7 +82,6 @@ public class HttpTestClient {
 		while ((line = br.readLine()) != null) {
 			sb.append(line);
 			sb.append("\n");
-			logger.error(line);
 		}
 		try {
 			socket.getOutputStream().close();

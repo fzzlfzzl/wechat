@@ -1,4 +1,4 @@
-package com.wechat.dao.test.db;
+package com.wechat.dao.db;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;

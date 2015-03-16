@@ -19,7 +19,6 @@ public class OptionItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
-	private Option option;
 	private double price;
 
 	public long getId() {
@@ -36,14 +35,6 @@ public class OptionItem {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Option getOption() {
-		return option;
-	}
-
-	public void setOption(Option option) {
-		this.option = option;
 	}
 
 	public double getPrice() {

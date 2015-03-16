@@ -2,11 +2,10 @@ package com.wechat.dao.db;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Set;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -20,7 +19,7 @@ import com.wechat.common.util.XmlObject;
 
 public class ConfigurationUtil {
 
-	private static final String defaultPackage = "com.dao.entity";
+	private static final String defaultPackage = "com.wechat.dao.entity";
 	private static Logger logger = Logger.getLogger(ConfigurationUtil.class);
 
 	public static Configuration buildDefaultConfiguration() {
@@ -47,8 +46,9 @@ public class ConfigurationUtil {
 			XmlObject conf = XmlObject.readFromStream(trimIs);
 			is.close();
 			trimIs.close();
-			forOption(conf, option);
+			forSepcOption(conf, option);
 			addEntityInfo(conf);
+			logger.info(conf.toXmlString());
 			return conf;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -56,11 +56,10 @@ public class ConfigurationUtil {
 	}
 
 	private static void addEntityInfo(XmlObject conf) {
-		Set<String> classNames = ClassUtil.getClassName(defaultPackage);
-		for (String name : classNames) {
-			XmlObject mapping = new XmlObject("mapping");
-			mapping.setAttribute("class", name);
-			conf.get("hibernate-configuration").get("session-factory").add(mapping);
+		List<Class<?>> classNames = ClassUtil.getClasses(defaultPackage);
+		for (Class<?> c : classNames) {
+			XmlObject mapping = conf.get("session-factory").add("mapping");
+			mapping.setAttribute("class", c.getName());
 		}
 	}
 
@@ -97,7 +96,7 @@ public class ConfigurationUtil {
 		}
 	}
 
-	private static void forOption(XmlObject conf, BuildOption option) {
+	private static void forSepcOption(XmlObject conf, BuildOption option) {
 		String url = "jdbc:mysql://127.0.0.1:3306/" + option.getDb();
 		String user = option.getUser();
 		String pwd = option.getPwd();
@@ -114,7 +113,6 @@ public class ConfigurationUtil {
 				property.setText(pwd);
 			}
 		}
-		logger.info(conf.toXmlString());
 	}
 
 	public static ServiceRegistry buildServiceRegistry(Configuration configuration) {

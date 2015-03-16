@@ -16,7 +16,6 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.xml.sax.InputSource;
 
-
 public class XmlObject {
 	private Document doc;
 	private Element element;
@@ -55,8 +54,10 @@ public class XmlObject {
 		}
 	}
 
-	public void add(XmlObject obj) {
-		element.addContent(obj.element);
+	public XmlObject add(String tag) {
+		Element ret = new Element(tag);
+		element.addContent(ret);
+		return new XmlObject(ret, doc);
 	}
 
 	public String getAttribute(String key) {
