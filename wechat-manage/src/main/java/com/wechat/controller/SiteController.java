@@ -30,4 +30,10 @@ public class SiteController extends WebController {
 		ret.addObject("orderList", view);
 		return ret;
 	}
+
+	@RequestMapping(value = "/dishes/add", method = RequestMethod.GET)
+	public ModelAndView dishesAdd() throws Exception {
+		ModelAndView ret = createNormalModelAndView("dishes/add");
+		return ret;
+	}
 }

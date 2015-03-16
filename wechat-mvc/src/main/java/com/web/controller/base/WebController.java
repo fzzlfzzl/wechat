@@ -10,6 +10,8 @@ import com.web.view.MasterModelAndView;
 
 public class WebController {
 
+	protected String controllerName = thisController();
+
 	protected String thisController() {
 		RequestMapping rm = this.getClass().getAnnotation(RequestMapping.class);
 		if (rm == null) {
@@ -26,33 +28,32 @@ public class WebController {
 	protected String url(String view) {
 		UserContext context = UserContext.current();
 		String url = null;
-		if (isSelfView(view)) {
-			url = String.format("%s/%s/%s", context.getRequest().getContextPath(), thisController(), view);
-		} else {
+		if (viewContainController(view)) {
 			url = String.format("%s/%s", context.getRequest().getContextPath(), view);
+		} else {
+			url = String.format("%s/%s/%s", context.getRequest().getContextPath(), controllerName, view);
 		}
 		return url;
 	}
 
-	protected String thisView(String view) {
-		String controller = thisController();
-		String ret = String.format("%s/%s", controller, view);
+	protected String concatControllerName(String view) {
+		String ret = String.format("%s/%s", controllerName, view);
 		return ret;
 	}
 
 	protected ModelAndView createNormalModelAndView(String view) {
-		if (isSelfView(view)) {
-			return new MasterModelAndView(thisView(view));
-		} else {
+		if (viewContainController(view)) {
 			return new MasterModelAndView(view);
+		} else {
+			return new MasterModelAndView(concatControllerName(view));
 		}
 	}
 
 	protected ModelAndView createAjaxModelAndView(String view) {
-		if (isSelfView(view)) {
-			return new ModelAndView(thisView(view));
-		} else {
+		if (viewContainController(view)) {
 			return new ModelAndView(view);
+		} else {
+			return new ModelAndView(concatControllerName(view));
 		}
 	}
 
@@ -69,15 +70,15 @@ public class WebController {
 
 	protected ModelAndView createForwardModelAndView(String view) {
 		String url = null;
-		if (isSelfView(view)) {
-			url = String.format("forward:/%s/%s", thisController(), view);
-		} else {
+		if (viewContainController(view)) {
 			url = String.format("forward:/%s", view);
+		} else {
+			url = String.format("forward:/%s/%s", thisController(), view);
 		}
 		return new ModelAndView(url);
 	}
 
-	private boolean isSelfView(String view) {
-		return view.indexOf("/") <= 0;
+	private boolean viewContainController(String view) {
+		return view.indexOf(controllerName) >= 0;
 	}
 }
