@@ -48,7 +48,7 @@ public class AuthenticateInterceptor extends HandlerInterceptorAdapter {
 		if (auth == null || auth.validate() == false) {
 			return true;
 		}
-		if (adminService.isLogin()) {
+		if (adminService.getLogin() != null) {
 			return true;
 		}
 		return false;

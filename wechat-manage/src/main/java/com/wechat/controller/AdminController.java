@@ -37,7 +37,7 @@ public class AdminController extends WebController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView loginPost(String name, String pwd) throws Exception {
-		if (service.login(name, pwd)) {
+		if (service.login(name, pwd) != null) {
 			return createRedirectModelAndView("user-list");
 		} else {
 			return loginGet();

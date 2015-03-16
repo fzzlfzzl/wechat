@@ -33,11 +33,16 @@ public class SuperAdminService {
 		return AdminDao.list();
 	}
 
-	public void addAdmin(String name, String pwd) {
+	public boolean addAdmin(String name, String pwd) {
 		Admin admin = new Admin();
 		admin.setName(name);
 		admin.setPassword(Util.sha1(pwd));
-		AdminDao.save(admin);
+		try {
+			AdminDao.save(admin);
+			return true;
+		} catch (RuntimeException e) {
+			return false;
+		}
 	}
 
 	public void deleteAdmin(long id) {
