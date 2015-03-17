@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Admin {
@@ -12,12 +13,12 @@ public class Admin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id = 0;
-
 	@Column(nullable = false, unique = true)
 	private String name = null;
-
 	@Column(nullable = false)
 	private String password = null;
+	@OneToOne
+	private Seller seller;
 
 	public long getId() {
 		return id;
@@ -41,6 +42,14 @@ public class Admin {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Seller getSeller() {
+		return seller;
+	}
+
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 
 }
