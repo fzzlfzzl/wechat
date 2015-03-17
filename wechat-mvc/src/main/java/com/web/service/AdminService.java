@@ -8,24 +8,21 @@ import com.wechat.dao.impl.AdminDao;
 
 public class AdminService {
 
-	public boolean isLogin() {
-		if (Auth.LOGIN.equals(UserContext.current().getRequest().getSession()
-				.getAttribute(Auth.LOGIN))) {
-			return true;
-		}
-		return false;
+	public Admin getLogin() {
+		Admin admin = (Admin) UserContext.current().getRequest().getSession().getAttribute(Auth.LOGIN);
+		return admin;
 	}
 
-	public boolean login(String name, String pwd) {
+	public Admin login(String name, String pwd) {
 		Admin admin = AdminDao.load(name);
 		if (admin == null) {
-			return false;
+			return null;
 		}
 		if (Util.sha1(pwd).equals(admin.getPassword())) {
-			UserContext.current().getRequest().getSession().setAttribute(Auth.LOGIN, Auth.LOGIN);
-			return true;
+			UserContext.current().getRequest().getSession().setAttribute(Auth.LOGIN, admin);
+			return admin;
 		} else {
-			return false;
+			return null;
 		}
 
 	}
