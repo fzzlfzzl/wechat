@@ -6,7 +6,7 @@ import org.hibernate.Session;
 
 import com.wechat.dao.entity.AccessToken;
 
-public class AccessTokenDao extends Dao {
+public class AccessTokenDao extends Dao<AccessToken> {
 
 	public AccessTokenDao(Session session) {
 		super(session);

@@ -20,7 +20,6 @@ public class Admin {
 	@OneToOne
 	private Seller seller;
 
-
 	public long getId() {
 		return id;
 	}

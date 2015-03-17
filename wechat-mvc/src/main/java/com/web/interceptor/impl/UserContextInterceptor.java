@@ -19,8 +19,6 @@ public class UserContextInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 			Object handler) throws Exception {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
 		Session session = HibernateUtil.openSession();
 		UserContext context = new UserContext(request, response, session);
 		UserContextPool.put(context);

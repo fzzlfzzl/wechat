@@ -15,16 +15,12 @@ public class AdminDao extends Dao<Admin> {
 
 	@SuppressWarnings("rawtypes")
 	public Admin get(String name) {
-		Session session = HibernateUtil.openSession();
-		try {
-			List list = session.createQuery("from Admin where name=:name").setString("name", name).list();
-			if (list.size() == 0) {
-				return null;
-			} else {
-				return (Admin) list.get(0);
-			}
-		} finally {
-			session.close();
+		List list = session.createQuery("from Admin where name=:name").setString("name", name).list();
+		if (list.size() == 0) {
+			return null;
+		} else {
+			return (Admin) list.get(0);
 		}
 	}
+
 }

@@ -4,17 +4,14 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
 import org.hibernate.Session;
-
-import com.wechat.dao.db.HibernateUtil;
 
 public class Dao<T> {
 
 	protected Session session = null;
+	protected Class<?> entityClass;
+
 	private boolean isActive = false;
-	Class<?> entityClass;
 
 	public Dao(Session session) {
 		this.session = session;
@@ -50,6 +47,7 @@ public class Dao<T> {
 			commit();
 		} catch (RuntimeException e) {
 			rollback();
+			session.clear();
 			throw e;
 		}
 	}
@@ -61,6 +59,7 @@ public class Dao<T> {
 			commit();
 		} catch (RuntimeException e) {
 			rollback();
+			session.clear();
 			throw e;
 		}
 	}
@@ -86,14 +85,18 @@ public class Dao<T> {
 		}
 	}
 
-	public void delete(T obj) {
+	public void delete(long id) {
 		beginTransaction();
 		try {
-			session.delete(obj);
+			String hql = String.format("delete %s where id = %d", entityClass.getSimpleName(), id);
+			System.out.println(hql);
+			session.createQuery(hql).executeUpdate();
 			commit();
 		} catch (RuntimeException e) {
 			rollback();
 			throw e;
+		} finally {
+			session.clear();
 		}
 	}
 }

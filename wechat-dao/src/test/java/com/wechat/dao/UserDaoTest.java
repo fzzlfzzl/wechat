@@ -48,16 +48,16 @@ public class UserDaoTest {
 				} catch (Exception e) {
 				}
 			}
-			{
-				// save exist
-				User user = dao.get(openid1);
-				user.setAddress("add");
-				try {
-					dao.save(user);
-					fail();
-				} catch (Exception e) {
-				}
-			}
+			// {
+			// // save exist
+			// User user = dao.get(openid1);
+			// user.setAddress("add");
+			// try {
+			// dao.save(user);
+			// fail();
+			// } catch (Exception e) {
+			// }
+			// }
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();

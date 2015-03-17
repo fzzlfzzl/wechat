@@ -1,6 +1,9 @@
 package com.wechat.mvc.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +21,7 @@ import com.web.service.SuperAdminService;
 import com.wechat.common.util.Util;
 import com.wechat.dao.db.HibernateUtil;
 import com.wechat.dao.entity.Admin;
+import com.wechat.dao.impl.AdminDao;
 import com.wechat.mvc.mock.MockSession;
 
 public class LoginServiceTest {
@@ -39,11 +43,13 @@ public class LoginServiceTest {
 
 	@Test
 	public void loginServiceTest() {
+		AdminDao dao = new AdminDao(UserContext.current().getSession());
 		try {
 			SuperAdminService saService = new SuperAdminService();
 			AdminService service = new AdminService();
 			String name = Util.uuid();
 			String pwd = "" + System.currentTimeMillis();
+
 			// 没有这个人,不能登录
 			{
 				Admin admin = service.login(name, pwd);
@@ -78,7 +84,7 @@ public class LoginServiceTest {
 			// 删除了，不能登录
 			{
 				Admin admin = service.getLogin();
-				saService.deleteAdmin(admin);
+				saService.deleteAdmin(admin.getId());
 				admin = service.login(name, pwd);
 				assertNull(admin);
 			}
