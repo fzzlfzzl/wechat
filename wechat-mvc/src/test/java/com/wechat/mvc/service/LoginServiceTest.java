@@ -31,7 +31,8 @@ public class LoginServiceTest {
 		request = EasyMock.createMock(HttpServletRequest.class);
 		response = EasyMock.createMock(HttpServletResponse.class);
 		session = new MockSession();
-		EasyMock.expect(request.getSession()).andReturn(session);
+		EasyMock.expect(request.getSession()).andReturn(session).anyTimes();
+		EasyMock.replay(request);
 		Session session = HibernateUtil.openSession();
 		UserContextPool.put(new UserContext(request, response, session));
 	}
@@ -42,7 +43,7 @@ public class LoginServiceTest {
 			SuperAdminService saService = new SuperAdminService();
 			AdminService service = new AdminService();
 			String name = Util.uuid();
-			String pwd = Util.uuid();
+			String pwd = "" + System.currentTimeMillis();
 			// 没有这个人,不能登录
 			{
 				Admin admin = service.login(name, pwd);
@@ -50,13 +51,13 @@ public class LoginServiceTest {
 			}
 			// 加入一个admin
 			{
-				boolean ret = saService.addAdmin(name, pwd);
-				assertTrue(ret);
+				Admin ret = saService.addAdmin(name, pwd);
+				assertNotNull(ret);
 			}
 			// 再加入就失败
 			{
-				boolean ret = saService.addAdmin(name, pwd);
-				assertFalse(ret);
+				Admin ret = saService.addAdmin(name, pwd);
+				assertNull(ret);
 			}
 			// 用户名对，密码不对
 			{
