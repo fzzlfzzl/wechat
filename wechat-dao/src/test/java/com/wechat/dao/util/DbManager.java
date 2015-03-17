@@ -1,4 +1,4 @@
-package com.test.util;
+package com.wechat.dao.util;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

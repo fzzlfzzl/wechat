@@ -1,4 +1,4 @@
-package com.test.dao;
+package com.wechat.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -8,12 +8,12 @@ import static org.junit.Assert.fail;
 import org.hibernate.Session;
 import org.junit.Test;
 
-import com.test.util.Common;
 import com.wechat.common.util.Util;
 import com.wechat.dao.db.HibernateUtil;
 import com.wechat.dao.entity.Message;
 import com.wechat.dao.entity.User;
 import com.wechat.dao.impl.UserDao;
+import com.wechat.dao.util.Common;
 
 public class UserDaoTest {
 

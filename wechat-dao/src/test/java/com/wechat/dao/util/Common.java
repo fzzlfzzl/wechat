@@ -1,4 +1,4 @@
-package com.test.util;
+package com.wechat.dao.util;
 
 import com.wechat.common.util.Util;
 import com.wechat.dao.entity.Message;

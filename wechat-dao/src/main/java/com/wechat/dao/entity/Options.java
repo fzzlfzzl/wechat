@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
  *         不可变对象,dao不提供修改接口
  */
 @Entity
-public class Option {
+public class Options {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

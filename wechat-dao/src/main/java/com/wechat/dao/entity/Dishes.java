@@ -25,7 +25,7 @@ public class Dishes {
 	private String name;
 	@OneToMany
 	@JoinColumn(name = "dishes_id")
-	private List<Option> options = new ArrayList<Option>();
+	private List<Options> options = new ArrayList<Options>();
 
 	public String getName() {
 		return name;
@@ -35,11 +35,11 @@ public class Dishes {
 		this.name = name;
 	}
 
-	public List<Option> getOptions() {
+	public List<Options> getOptions() {
 		return options;
 	}
 
-	public void setOptions(List<Option> options) {
+	public void setOptions(List<Options> options) {
 		this.options = options;
 	}
 

@@ -30,27 +30,30 @@ public class SuperAdminService {
 	}
 
 	public List<Admin> getAdminList() {
-		return AdminDao.list();
+		return new AdminDao(UserContext.current().getSession()).list();
 	}
 
-	public Admin addAdmin(String name, String pwd) {
-		Admin admin = new Admin();
+	public boolean addAdmin(String name, String pwd) {		Admin admin = new Admin();
 		admin.setName(name);
 		admin.setPassword(Util.sha1(pwd));
-		try {
-			AdminDao.save(admin);
+		AdminDao dao = new AdminDao(UserContext.current().getSession());
+		try(
+			dao.save(admin);
 			return admin;
-		} catch (RuntimeException e) {
+		}catch(RuntimeException e){
 			return null;
 		}
-	}
+		
+}
 
 	public void deleteAdmin(long id) {
-		AdminDao.delete(id);
+		Admin admin = new Admin();
+		admin.setId(id);
+		deleteAdmin(admin);
 	}
 
-	public void deleteAdmin(Admin admin) {
-		deleteAdmin(admin.getId());
+	public void deleteAdmin(Admin admin) { 
+		new AdminDao(UserContext.current().getSession()).delete(admin);
 	}
 
 }

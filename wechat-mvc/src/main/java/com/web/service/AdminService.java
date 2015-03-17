@@ -8,13 +8,16 @@ import com.wechat.dao.impl.AdminDao;
 
 public class AdminService {
 
+
 	public Admin getLogin() {
 		Admin admin = (Admin) UserContext.current().getRequest().getSession().getAttribute(Auth.LOGIN);
 		return admin;
 	}
 
+
 	public Admin login(String name, String pwd) {
-		Admin admin = AdminDao.load(name);
+		AdminDao dao = new AdminDao(UserContext.current().getSession());
+		Admin admin = dao.get(name);
 		if (admin == null) {
 			return null;
 		}
@@ -24,7 +27,6 @@ public class AdminService {
 		} else {
 			return null;
 		}
-
 	}
 
 	public void logout() {

@@ -1,4 +1,4 @@
-package com.test.dao;
+package com.wechat.dao;
 
 import org.hibernate.Session;
 import org.junit.Test;

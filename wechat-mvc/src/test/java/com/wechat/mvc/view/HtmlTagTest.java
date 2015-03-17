@@ -1,4 +1,4 @@
-package com.test.view;
+package com.wechat.mvc.view;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
