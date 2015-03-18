@@ -32,7 +32,15 @@ public class SiteController extends WebController {
 	}
 
 	@RequestMapping(value = "/dishes/add", method = RequestMethod.GET)
-	public ModelAndView dishesAdd() throws Exception {
+	public ModelAndView dishesAddGet() throws Exception {
+		ModelAndView ret = createNormalModelAndView("dishes/add");
+		ret.addObject("url", url("dishes/add"));
+		return ret;
+	}
+
+	@RequestMapping(value = "/dishes/add", method = RequestMethod.POST)
+	public ModelAndView dishesAddPost(String name, String desc, String price, String[] tasteName, String[] tastePrice)
+			throws Exception {
 		ModelAndView ret = createNormalModelAndView("dishes/add");
 		return ret;
 	}

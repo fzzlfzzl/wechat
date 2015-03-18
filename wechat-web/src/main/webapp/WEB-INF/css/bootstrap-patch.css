@@ -726,9 +726,25 @@
 	padding-left: 5px;
 }
 
+/*屏蔽悬浮的底色*/
 a.outline-primary:focus, a.outline-primary:hover,
 	a.outline-primary {
 	color: #2e6da4;
 	background-color: transparent;
 	border-color: #2e6da4;
+}
+
+.row.row-gap {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.row.row-gap-bg {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.row.row-gap-sm {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
