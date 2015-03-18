@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import com.wechat.dao.db.HibernateUtil;
+import com.wechat.dao.Dao;
 import com.wechat.dao.entity.Admin;
 
 public class AdminDao extends Dao<Admin> {

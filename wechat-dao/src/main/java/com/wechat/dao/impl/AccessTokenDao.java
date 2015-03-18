@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import com.wechat.dao.Dao;
 import com.wechat.dao.entity.AccessToken;
 
 public class AccessTokenDao extends Dao<AccessToken> {

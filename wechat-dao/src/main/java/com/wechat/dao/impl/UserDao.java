@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.wechat.dao.Dao;
 import com.wechat.dao.entity.Message;
 import com.wechat.dao.entity.User;
 

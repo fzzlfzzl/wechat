@@ -1,4 +1,4 @@
-package com.wechat.dao.impl;
+package com.wechat.dao;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
